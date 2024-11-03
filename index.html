@@ -3,160 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404</title>
+    <title>Tijd voor een lancering...</title>
+    <link rel="icon" href="images/ico.ico" type="image/ico">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HHY0YKD8VS');
+</script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #000000;
             color: #ffffff;
-        }
-        .container {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             text-align: center;
         }
-        h1 {
-            font-weight: 300;
-            font-size: 2.5em;
+
+        .link {
+            font-size: 3em;
+            font-weight: bold;
+            color: #007AFF;
+            margin-bottom: 20px;
         }
-        p {
-            font-weight: 200;
+
+        .countdown {
+            font-size: 4em;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 20px 0;
         }
-        .cat {
-            width: 200px;
-            height: 180px;
-            position: relative;
-            margin: 50px auto;
+
+        .gradient-text {
+            font-size: 2em;
+            font-weight: bold;
+            background: -webkit-linear-gradient(0deg, #dc36fa, #a167ef 30%, #609fe4 45%, #3abfde 70%, #04d18e 85%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .head {
-            width: 100px;
-            height: 80px;
-            background: #808080;
-            border-radius: 50% 50% 30% 30%;
-            position: absolute;
-            top: 0;
-            left: 50px;
+
+        .apple-text {
+            font-size: 1.5em;
+            color: #FF2D55;
+            max-width: 600px;
+            margin-top: 50px;
+            line-height: 1.6;
         }
-        .ear {
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 30px solid #808080;
-            position: absolute;
-            top: -20px;
-        }
-        .ear-left {
-            left: 10px;
-            transform: rotate(-30deg);
-        }
-        .ear-right {
-            right: 10px;
-            transform: rotate(30deg);
-        }
-        .eye {
-            width: 25px;
-            height: 25px;
-            background: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 20px;
-        }
-        .eye-left {
-            left: 20px;
-        }
-        .eye-right {
-            right: 20px;
-        }
-        .pupil {
-            width: 10px;
-            height: 20px;
-            background: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 7px;
-            animation: blink 4s infinite;
-        }
-        .nose {
-            width: 15px;
-            height: 8px;
-            background: #FFA7A7;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 30px;
-            left: 42px;
-        }
-        .mouth {
-            width: 30px;
-            height: 10px;
-            border: 2px solid #000;
-            border-bottom: none;
-            border-radius: 100px 100px 0 0;
-            position: absolute;
-            bottom: 15px;
-            left: 35px;
-        }
-        .body {
-            width: 150px;
-            height: 100px;
-            background: #808080;
-            border-radius: 50% 50% 30% 30%;
-            position: absolute;
-            bottom: 0;
-            left: 25px;
-        }
-        .tail {
-            width: 70px;
-            height: 20px;
-            background: #808080;
-            position: absolute;
-            right: -30px;
-            bottom: 0;
-            border-radius: 0 0 20px 0;
-            transform-origin: 0 50%;
-            transform: rotate(-45deg);
-        }
-        .button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0071e3;
-            color: white;
-            text-decoration: none;
-            border-radius: 980px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .button:hover {
-            background-color: #0077ED;
-        }
-        @keyframes blink {
-            0%, 96%, 98% {transform: scaleY(1);}
-            97%, 99% {transform: scaleY(0.1);}
-        }
+
+        .highlight-blue { color: #007AFF; }
+        .highlight-yellow { color: #FFCC00; }
+        .highlight-lightblue { color: #5AC8FA; }
+        .highlight-green { color: #34C759; }
+        .highlight-orange { color: #FF9500; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Werk aan de winkel</h1>
-        <p>Benjamin is hard aan het werk om de website te verbeteren...</p>
-        <div class="cat">
-            <div class="head">
-                <div class="ear ear-left"></div>
-                <div class="ear ear-right"></div>
-                <div class="eye eye-left"><div class="pupil"></div></div>
-                <div class="eye eye-right"><div class="pupil"></div></div>
-                <div class="nose"></div>
-                <div class="mouth"></div>
-            </div>
-            <div class="body"></div>
-            <div class="tail"></div>
-        </div>
-        <a href="https://sitemap.benjamintjoa.nl" class="button">Naar sitemap</a>
+    <div class="link">Games.benjamintjoa.nl</div>
+    
+    <div id="countdown" class="countdown">Één momentje...</div>
+    
+    <div class="gradient-text">Tijd voor een magische lancering: Games.benjamintjoa.nl</div>
+
+    <div class="apple-text">
+        Een magische ervaring, zonder afleiding.<br>
+        <span class="highlight-yellow">Maandag 4 november 12:00 is het zover!</span><br>
+        <strong><span class="highlight-blue">Games.benjamintjoa.nl</span></strong> brengt je alles wat je zoekt, op één plek. Volledig <span class="highlight-green">advertentievrij</span>, <span class="highlight-orange">onbeperkt</span> toegankelijk en <span class="highlight-lightblue">fullscreen</span> voor maximale beleving. Of je nu speelt, ontdekt, of gewoon wilt genieten – dit is gamen zoals het hoort: zonder beperkingen, zonder onderbrekingen. Gewoon puur plezier, precies zoals je het wilt. 
+        Welkom bij <span class="highlight-blue">Games.benjamintjoa.nl!</span>
     </div>
+
+    <script>
+        const targetDate = new Date("2024-11-04T12:00:00");
+
+        async function fetchTime() {
+            try {
+                const response = await fetch("http://worldtimeapi.org/api/timezone/Europe/Amsterdam");
+                const data = await response.json();
+                return new Date(data.datetime);
+            } catch (error) {
+                console.warn("Externe API niet bereikbaar, interne tijd wordt gebruikt.");
+                return new Date();
+            }
+        }
+
+        async function updateClock() {
+            const currentDate = await fetchTime();
+            const timeDifference = targetDate - currentDate;
+
+            if (timeDifference <= 0) {
+                document.getElementById("countdown").innerHTML = "De tijd is gekomen!";
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                `${String(days).padStart(2, '0')}:${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
