@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tijd voor een lancering...</title>
+    <title>Tijd voor een lancering..</title>
     <link rel="icon" href="images/ico.ico" type="image/ico">
-    <!-- Google tag (gtag.js) -->
+        <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,7 +14,14 @@
 
   gtag('config', 'G-HHY0YKD8VS');
 </script>
+
     <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -26,6 +33,7 @@
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             text-align: center;
+            padding: 20px;
         }
 
         .link {
@@ -33,6 +41,9 @@
             font-weight: bold;
             color: #007AFF;
             margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+            word-wrap: break-word;
         }
 
         .countdown {
@@ -48,13 +59,14 @@
             background: -webkit-linear-gradient(0deg, #dc36fa, #a167ef 30%, #609fe4 45%, #3abfde 70%, #04d18e 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
         }
 
         .apple-text {
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: #FF2D55;
             max-width: 600px;
-            margin-top: 50px;
+            margin-top: 30px;
             line-height: 1.6;
         }
 
@@ -63,19 +75,26 @@
         .highlight-lightblue { color: #5AC8FA; }
         .highlight-green { color: #34C759; }
         .highlight-orange { color: #FF9500; }
+
+        @media (max-width: 768px) {
+            .link { font-size: 2em; }
+            .countdown { font-size: 2.5em; }
+            .gradient-text { font-size: 1.5em; }
+            .apple-text { font-size: 1em; }
+        }
     </style>
 </head>
 <body>
     <div class="link">Games.benjamintjoa.nl</div>
     
-    <div id="countdown" class="countdown">Één momentje...</div>
+    <div id="countdown" class="countdown">Laden...</div>
     
     <div class="gradient-text">Tijd voor een magische lancering: Games.benjamintjoa.nl</div>
 
     <div class="apple-text">
         Een magische ervaring, zonder afleiding.<br>
         <span class="highlight-yellow">Maandag 4 november 12:00 is het zover!</span><br>
-        <strong><span class="highlight-blue">Games.benjamintjoa.nl</span></strong> brengt je alles wat je zoekt, op één plek. Volledig <span class="highlight-green">advertentievrij</span>, <span class="highlight-orange">onbeperkt</span> toegankelijk en <span class="highlight-lightblue">fullscreen</span> voor maximale beleving. Of je nu speelt, ontdekt, of gewoon wilt genieten – dit is gamen zoals het hoort: zonder beperkingen, zonder onderbrekingen. Gewoon puur plezier, precies zoals je het wilt. 
+        <strong><span class="highlight-blue">Games.benjamintjoa.nl</span></strong> brengt je alles wat je zoekt, op één plek. Volledig <span class="highlight-green">advertentievrij,</span> <span class="highlight-orange">onbeperkt</span> toegankelijk en <span class="highlight-lightblue">fullscreen</span> voor maximale beleving. Of je nu speelt, ontdekt, of gewoon wilt genieten – dit is gamen zoals het hoort: zonder beperkingen, zonder onderbrekingen. Gewoon puur plezier, precies zoals je het wilt. 
         Welkom bij <span class="highlight-blue">Games.benjamintjoa.nl!</span>
     </div>
 
