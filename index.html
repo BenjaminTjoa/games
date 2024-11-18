@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welkom bij Games.benjamintjoa.nl</title>
+    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HHY0YKD8VS');
+</script>
     <style>
         body {
             margin: 0;
@@ -33,7 +43,9 @@
             stroke-linecap: round;
             stroke-dasharray: 2400;
             stroke-dashoffset: 2400;
-            animation: draw 2s ease-in-out forwards, reverse-draw 2s ease-in 4s forwards;
+            animation: 
+                draw 2s ease-in-out forwards 2s, 
+                disappear 1s forwards 6s;
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
@@ -46,12 +58,12 @@
             }
         }
 
-        @keyframes reverse-draw {
+        @keyframes disappear {
             0% {
-                stroke-dashoffset: 0;
+                opacity: 1;
             }
             100% {
-                stroke-dashoffset: -2400;
+                opacity: 0;
             }
         }
 
@@ -67,7 +79,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 1;
-            animation: fade-out-text 1s ease-in 8s forwards;
+            animation: fade-out-text 1s ease-in 10s forwards;
         }
 
         @keyframes fade-out-text {
@@ -83,7 +95,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            animation: fade-out-stars 1s ease-in 6s forwards;
+            animation: fade-out-stars 1s ease-in 8s forwards;
         }
 
         .star {
@@ -121,7 +133,7 @@
             height: 100%;
             border: none;
             opacity: 0;
-            animation: show-iframe 1s ease-in 10s forwards;
+            animation: show-iframe 1s ease-in 12s forwards;
         }
 
         @keyframes show-iframe {
