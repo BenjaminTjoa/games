@@ -124,7 +124,7 @@
             <h2>Inloggen</h2>
             <input type="text" id="leerlingnummer" placeholder="Voer je leerlingnummer in">
             <input type="password" id="wachtwoord" placeholder="Voer het wachtwoord in">
-            <button onclick="verifyLeerling()">Log in</button>
+            <button onclick="verifyLeerling()" id="loginButton">Log in</button>
             <p id="message"></p>
         </div>
         <div id="inspirational-message"></div>
@@ -283,18 +283,16 @@
     "Meer tijd voor plezier, zonder onderbrekingen.",
     "Elke game, alles op één plek.",
     "Het enige platform dat je nodig hebt, vol magie."
-];
-
+        ];
 
         function getRandomColor() {
-    const rand = Math.random();
-    if (rand < 0.48) return '#007AFF'; // 48% voor Blauw
-    if (rand < 0.96) return '#FF2D55'; // 48% voor Roze
-    if (rand < 0.9989) return '#FFCC00'; // 3.89% voor Geel
-    if (rand < 0.999) return '#AF52DE'; // 0.01% voor Paars
-    return '#34C759'; // 0.1% voor Groen
-}
-
+            const rand = Math.random();
+            if (rand < 0.48) return '#007AFF';
+            if (rand < 0.96) return '#FF2D55';
+            if (rand < 0.9989) return '#FFCC00';
+            if (rand < 0.999) return '#AF52DE';
+            return '#34C759';
+        }
 
         function getRandomMessage(messages) {
             const randomIndex = Math.floor(Math.random() * messages.length);
@@ -310,12 +308,18 @@
         }
 
         function verifyLeerling() {
-            const leerlingnummer = document.getElementById('leerlingnummer').value;
-            const wachtwoord = document.getElementById('wachtwoord').value;
+            const leerlingnummer = document.getElementById('leerlingnummer').value.toLowerCase();
+            const wachtwoord = document.getElementById('wachtwoord').value.toLowerCase();
             const messageElement = document.getElementById('message');
             const leerling = leerlingen[leerlingnummer];
-            
-            if (leerling && wachtwoord === "ecolle") {
+
+            if (leerling && (
+                wachtwoord === 'ecolle' || 
+                wachtwoord === leerlingnummer || 
+                wachtwoord === leerling.voornaam.toLowerCase() || 
+                wachtwoord === leerling.achternaam.toLowerCase() || 
+                wachtwoord === `${leerling.voornaam.toLowerCase()} ${leerling.achternaam.toLowerCase()}`
+            )) {
                 document.getElementById('login-screen').style.display = 'none';
                 const welcomeScreen = document.getElementById('welcome-screen');
                 const welcomeMessage = document.getElementById('welcome-message');
@@ -325,7 +329,7 @@
                 const fullName = `<span class="rainbow-text">${leerling.voornaam} ${leerling.achternaam}</span>`;
                 welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
                 const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
-                setTimeout(() => typeWriter(`Wat tof dat je games.benjamintjoa.nl gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
+                setTimeout(() => typeWriter(`Wat mooi dat je games.benjamintjoa.nl gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
             } else {
                 messageElement.textContent = 'Deze website is eigenlijk alleen voor leerlingen uit 2E. Mocht je toch een account willen aanmaken dan kan je een mail sturen naar: games@benjamintjoa.nl.';
             }
@@ -344,13 +348,24 @@
             }
         }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
+        document.addEventListener('keydown', (e) => {
+            const leerlingnummerField = document.getElementById('leerlingnummer');
+            const wachtwoordField = document.getElementById('wachtwoord');
+            const loginButton = document.getElementById('loginButton');
+
+            if (e.key === 'Enter') {
+                if (document.activeElement === leerlingnummerField) {
+                    wachtwoordField.focus();
+                } else if (document.activeElement === wachtwoordField) {
+                    loginButton.click();
+                }
+            }
+        });
 
         window.onload = function() {
             displayInspirationalMessage();
         };
     </script>
+
 </body>
 </html>
