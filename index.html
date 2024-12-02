@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welkom bij Games.benjamintjoa.com</title>
+    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HHY0YKD8VS');
+</script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            overflow: hidden;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .curve {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .curve path {
+            fill: none;
+            stroke-width: 25;
+            stroke-linecap: round;
+            stroke-dasharray: 2400;
+            stroke-dashoffset: 2400;
+            animation: 
+                draw 2s ease-in-out forwards 2s, 
+                disappear 1s forwards 6s;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        @keyframes draw {
+            0% {
+                stroke-dashoffset: 2400;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes disappear {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .welcome {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2rem, 5vw, 6rem);
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(90deg, #34c759, #007aff, #ffcc00, #ff3b30, #af52de);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 1;
+            animation: fade-out-text 1s ease-in 10s forwards;
+        }
+
+        @keyframes fade-out-text {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: fade-out-stars 1s ease-in 8s forwards;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-out-stars {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            animation: show-iframe 1s ease-in 12s forwards;
+        }
+
+        @keyframes show-iframe {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="welcome">
+        Welkom
+    </div>
+
+    <svg class="line">
+        <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#34c759" />
+                <stop offset="100%" stop-color="#007aff" />
+            </linearGradient>
+            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffcc00" />
+                <stop offset="100%" stop-color="#ff3b30" />
+            </linearGradient>
+            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#af52de" />
+                <stop offset="100%" stop-color="#34c759" />
+            </linearGradient>
+        </defs>
+        <g class="curve">
+            <path d="M 0,300 C 400,100 800,500 1200,200 C 1600,50 2000,300 2400,150" />
+        </g>
+        <g class="curve">
+            <path d="M 0,400 C 300,450 1000,600 1400,400 C 1800,200 2100,500 2400,350" />
+        </g>
+        <g class="curve">
+            <path d="M 0,500 C 500,700 1100,400 1600,500 C 2000,600 2200,700 2400,550" />
+        </g>
+    </svg>
+
+    <iframe src="https://games.benjamintjoa.com/start/"></iframe>
+
+    <script>
+        const starsContainer = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            starsContainer.appendChild(star);
+        }
+
+        const gradients = ["url(#gradient1)", "url(#gradient2)", "url(#gradient3)"];
+        const usedGradients = new Set();
+
+        document.querySelectorAll('.curve path').forEach(path => {
+            let gradient;
+            do {
+                gradient = gradients[Math.floor(Math.random() * gradients.length)];
+            } while (usedGradients.has(gradient));
+
+            usedGradients.add(gradient);
+            path.style.stroke = gradient;
+        });
+    </script>
+</body>
+</html>
