@@ -4,90 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welkom bij Games.BenjaminTjoa.com</title>
-    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+    <link rel="icon" href="images/ico.ico" type="image/ico">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-HHY0YKD8VS');
-</script>
+        gtag('config', 'G-HHY0YKD8VS');
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap');
-
-        body, html {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #0D102D;
             margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-        }
-        #login-screen {
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100%;
+            transition: background-color 0.5s ease;
         }
-        #login-box {
-            background-color: rgba(28, 28, 30, 0.8);
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 30px;
-            font-weight: 500;
-            font-size: 24px;
-        }
-        input {
-            display: block;
-            margin: 20px 0;
-            padding: 12px;
-            width: 100%;
-            background-color: rgba(118, 118, 128, 0.24);
-            border: none;
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        input::placeholder {
-            color: #8e8e93;
-        }
-        button {
-            background-color: #0A84FF;
-            color: white;
-            padding: 12px 0;
-            border: none;
-            border-radius: 10px;
+        h1 {
+            color: #007AFF;
+            font-size: 48px;
+            margin-bottom: 40px;
             cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #007AFF;
-        }
-        #welcome-screen {
-            display: none;
-            background-color: black;
-            color: white;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            text-align: center;
-            flex-direction: column;
+            transition: color 0.5s ease;
         }
         .rainbow-text {
             font-weight: bold;
@@ -96,342 +39,447 @@
             background-clip: text;
             color: transparent;
             display: inline-block;
+            transition: background 0.5s ease;
         }
-        #inspirational-message {
-            margin-top: 20px;
+        .apple-button {
+            display: inline-block;
+            background: #007AFF;
+            color: white;
+            border-radius: 999px;
+            padding: 12px 24px;
             font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+        }
+        .apple-button:hover {
+            background: #0056b3;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .game-card, .game-card-red, .game-card-green {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.5s ease;
+        }
+        .game-card {
+            background-color: #fff;
+        }
+        .game-card-red {
+            background-color: #FF3B30;
+        }
+        .game-card-green {
+            background-color: #34C759;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-info {
+            padding: 20px;
             text-align: center;
         }
-        #gamesSection {
+        .game-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1d1d1f;
+            transition: color 0.5s ease;
+        }
+        .play-button {
+            display: inline-block;
+            background-color: #007aff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .play-button:hover {
+            background-color: #0056b3;
+        }
+        #popup {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
         }
-        #gamesSection iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .popup-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .popup-title {
+            color: #007AFF;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        .popup-description {
+            font-size: 1em;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .popup-btns {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 20px;
+        }
+        .popup-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2em;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .popup-btn.donate {
+            background-color: #007AFF;
+            color: #fff;
+        }
+        .popup-btn.donate:hover {
+            background-color: #0056b3;
+        }
+        .popup-btn.not-now {
+            background-color: #FF3B30;
+            color: #fff;
+        }
+        .popup-btn.not-now:hover {
+            background-color: #FF2C29;
+        }
+        .popup-heart {
+            font-size: 2em;
+            color: #007AFF;
+        }
+        .student-number-input {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 2px solid #34C759;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div id="login-box">
-            <h2>Inloggen</h2>
-            <input type="text" id="leerlingnummer" placeholder="Voer je leerlingnummer in">
-            <input type="password" id="wachtwoord" placeholder="Voer het wachtwoord in">
-            <button onclick="verifyLeerling()" id="loginButton">Log in</button>
-            <p id="message"></p>
+    <h1 id="site-title">Games.BenjaminTjoa.com</h1>
+    <div class="games-grid">
+        <div class="game-card">
+            <img src="images/Stickman-Hook.jpg" alt="Stickman Hook" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Stickman Hook</h2>
+                <a href="https://games.benjamintjoa.com/stickman-hook" class="play-button">Speel nu</a>
+            </div>
         </div>
-        <div id="inspirational-message"></div>
+        <div class="game-card">
+            <img src="images/run-3.jpg" alt="Run 3" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Run 3</h2>
+                <a href="https://games.benjamintjoa.com/run-3" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/sausage-flip.jpg" alt="Sausage Flip" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Sausage Flip</h2>
+                <a href="https://games.benjamintjoa.com/sausage-flip" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/pac-man.jpg" alt="Pac-Man" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Pac-Man</h2>
+                <a href="https://games.benjamintjoa.com/pac-man/" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Snow-Rider-3D.jpg" alt="Snow Rider 3D" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Snow Rider 3D</h2>
+                <a href="https://games.benjamintjoa.com/snow-rider-3d/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Drive-Mad.jpg" alt="Drive Mad" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Drive Mad</h2>
+                <a href="https://games.benjamintjoa.com/drive-mad/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Slope.jpg" alt="Slope" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Slope</h2>
+                <a href="https://games.benjamintjoa.com/slope/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/subway-surfers-newyork.jpg" alt="Subway Surfers Newyork" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Subway Surfers Newyork</h2>
+                <a href="https://games.benjamintjoa.com/subway-surfers-newyork" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fireboy-And-Watergirl.jpg" alt="Fireboy and Watergirl" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Fireboy and Watergirl 1</h2>
+                <a href="https://games.benjamintjoa.com/fireboy-and-watergirl/" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fireboy-And-Watergirl-2.jpg" alt="Fireboy and Watergirl 2" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Fireboy and Watergirl 2</h2>
+                <a href="https://games.benjamintjoa.com/fireboy-and-watergirl-2/" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fireboy-And-Watergirl-3.jpg" alt="Fireboy and Watergirl 3" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Fireboy and Watergirl 3</h2>
+                <a href="https://games.benjamintjoa.com/fireboy-and-watergirl-3/" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fireboy-And-Watergirl-4.jpg" alt="Fireboy and Watergirl 4" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Fireboy and Watergirl 4</h2>
+                <a href="https://games.benjamintjoa.com/fireboy-and-watergirl-4/" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fnaf.jpg" alt="Fnaf" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Five Nights At Freddy</h2>
+                <a href="https://games.benjamintjoa.com/fnaf/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fnaf-2.jpg" alt="Fnaf 2" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Five Nights At Freddy 2</h2>
+                <a href="https://games.benjamintjoa.com/fnaf-2/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fnaf-3.jpg" alt="Fnaf 3" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Five Nights At Freddy 3</h2>
+                <a href="https://games.benjamintjoa.com/fnaf-3/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/Fnaf-4.jpg" alt="Fnaf 4" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Five Nights At Freddy 4</h2>
+                <a href="https://games.benjamintjoa.com/fnaf-4/" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/moto-x3m.jpg" alt="Moto X3M" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Moto X3M</h2>
+                <a href="https://games.benjamintjoa.com/moto-x3m" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/spooky-moto-x3m.jpg" alt="Spooky Moto X3M" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Spooky Moto X3M</h2>
+                <a href="https://games.benjamintjoa.com/spooky-moto-x3m" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/moto-x3m-winter.jpg" alt="Moto X3M Winter" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Moto X3M Winter</h2>
+                <a href="https://games.benjamintjoa.com/moto-x3m-winter" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/moto-x3m-2.png" alt="Moto X3M 2" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Moto X3M 2</h2>
+                <a href="https://games.benjamintjoa.com/moto-x3m-2" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/monster-tracks.png" alt="Monster Tracks" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Monster Tracks</h2>
+                <a href="https://games.benjamintjoa.com/monster-tracks" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/2048.jpg" alt="2048" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">2048</h2>
+                <a href="https://games.benjamintjoa.com/2048" class="play-button">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/color-switch.jpg" alt="Among Us" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Color Switch</h2>
+                <a href="https://games.benjamintjoa.com/color-switch" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/crossy-road.jpg" alt="Crossy Road" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Crossy Road</h2>
+                <a href="https://games.benjamintjoa.com/crossy-road" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/we-become-what-we-behold.jpg" alt="We Become What We Behold" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">We Become What We Behold</h2>
+                <a href="https://games.benjamintjoa.com/we-become-what-we-behold" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/color-tunnel-2.jpg" alt="Color Tunnel 2" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Color Tunnel 2</h2>
+                <a href="https://games.benjamintjoa.com/color-tunnel-2" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/tomb-of-the-mask.png" alt="Tomb Of The Mask" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Tomb Of The Mask</h2>
+                <a href="https://games.benjamintjoa.com/tomb-of-the-mask" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/tiny-fishing.jpg" alt="Tiny Fishing" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Tiny Fishing</h2>
+                <a href="https://games.benjamintjoa.com/tiny-fishing" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/bubble-shooter.png" alt="Bubble Shooter" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Bubble Shooter</h2>
+                <a href="https://games.benjamintjoa.com/bubble-shooter" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="images/fruit-merge.jpg" alt="Fruit Merge" class="game-image">
+            <div class="game-info">
+                <h2 class="game-title">Fruit Merge</h2>
+                <a href="https://games.benjamintjoa.com/fruit-merge" class="play-button" target="_blank" rel="noopener noreferrer">Speel nu</a>
+            </div>
+        </div>
+        <div class="game-card-green">
+            <div class="game-info">
+                <h2 class="game-title">Ken jij nou nog iemand die echt op deze site wil?</h2>
+                <h2 class="game-title">Maak hier een account voor hem aan:</h2>
+                <form action="https://formspree.io/f/mrbekbpg" method="POST">
+                    <input type="text" name="naam" class="student-number-input" placeholder="Naam" required>
+                    <input type="text" name="leerlingnummer" class="student-number-input" placeholder="Leerlingnummer" required>
+                    <button type="submit" class="apple-button">Verstuur</button>
+                </form>
+            </div>
+        </div>
+        <div class="game-card-green">
+            <div class="game-info">
+                <h2 class="game-title">Weet je nog een leuk spelletje?</h2>
+                <h2 class="game-title">Stuur 'm hier in, en wie weet komt hij om de site!</h2>
+                <form action="https://formspree.io/f/mqaedrqe" method="POST">
+                    <input type="text" name="spelnaam" class="student-number-input" placeholder="Spel-Naam" required>
+                    <input type="text" name="spel-link" class="student-number-input" placeholder="Link (optioneel)">
+                    <button type="submit" class="apple-button">Verstuur</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="welcome-screen">
-        <div id="welcome-message"></div>
-    </div>
-    <div id="gamesSection">
-        <iframe src="https://cloud.benjamintjoa.com/games-dark"></iframe>
+
+    <div id="popup">
+        <div class="popup-container">
+            <h1 class="popup-title">Support.BenjaminTjoa.com</h1>
+            <p class="popup-description">Het zou tof zijn als je een klein bedrag wilt doneren! 💙</p>
+            <div class="popup-btns">
+                <a href="https://link.benjamintjoa.com/games/support.benjamintjoa.com" class="popup-btn donate" target="_blank">Doneer</a>
+                <a href="#" class="popup-btn not-now" id="close-popup">Niet nu</a>
+            </div>
+        </div>
     </div>
 
     <script>
-        const leerlingen = {
-            "2223069": { voornaam: "Linde", achternaam: "Constandse" },
-            "2223215": { voornaam: "Benjamin", achternaam: "Tjoa" },
-            "2324001": { voornaam: "Charlotte", achternaam: "Adema" },
-            "2324002": { voornaam: "Yfke", achternaam: "Agterhof" },
-            "2324005": { voornaam: "Elena", achternaam: "Al-Kinani" },
-            "2324011": { voornaam: "Olivia", achternaam: "Aznar-Oswald" },
-            "2324030": { voornaam: "Isa", achternaam: "Buijs" },
-            "2324033": { voornaam: "Kemal", achternaam: "Ceylan" },
-            "2324037": { voornaam: "Lotte", achternaam: "Costantin" },
-            "2324038": { voornaam: "Sara", achternaam: "Dekker" },
-            "2324048": { voornaam: "Sebastiaan", achternaam: "Filmer" },
-            "2324057": { voornaam: "Lumen", achternaam: "Hokstam" },
-            "2324064": { voornaam: "Loek", achternaam: "de Jonge" },
-            "2324084": { voornaam: "Taeke", achternaam: "van der Lugt" },
-            "2324091": { voornaam: "Merlijn", achternaam: "Massa" },
-            "2324110": { voornaam: "Fenna", achternaam: "Rasch" },
-            "2324116": { voornaam: "Sasha", achternaam: "Rodriguez" },
-            "2324121": { voornaam: "Hanna", achternaam: "van Ruiten" },
-            "2324130": { voornaam: "Olivier", achternaam: "Soyogul" },
-            "2324131": { voornaam: "Dexter", achternaam: "Speelman" },
-            "2324139": { voornaam: "Julian", achternaam: "Streefland" },
-            "2324150": { voornaam: "Anne-Louise", achternaam: "van Veen" },
-            "2324153": { voornaam: "Luc", achternaam: "Visser" },
-            "2324156": { voornaam: "Cas", achternaam: "Vrisekoop" },
-            "2324159": { voornaam: "Daniel", achternaam: "Westerkamp" },
-            "2324162": { voornaam: "Olivia", achternaam: "van der Wurff" },
-            "2324165": { voornaam: "Hanna", achternaam: "Zhang" },
-            "2324196": { voornaam: "Max", achternaam: "Carrière" },
-            "2324221": { voornaam: "David", achternaam: "Prinsen" },
-            "2324227": { voornaam: "Scott", achternaam: "Rusman" },
-            "2425294": { voornaam: "Toon", achternaam: "de Vrieze" },
-            "VRA": { voornaam: "Anita", achternaam: "de Vries" },
-            "Anita": { voornaam: "Anita", achternaam: "de Vries" },
-            "anita": { voornaam: "Anita", achternaam: "de Vries" },
-            "Anita de Vries": { voornaam: "Anita", achternaam: "de Vries" },
-            "2223251": { voornaam: "Aiden", achternaam: "van Zomeren" },
-            "2223062": { voornaam: "Anvay", achternaam: "Choudhary" },
-            "2324029": { voornaam: "Cas", achternaam: "Buijs" },
-            "2223187": { voornaam: "Jelle", achternaam: "van Ruiten" },
-            "Annabelle": { voornaam: "Annabelle", achternaam: "Tjoa" },
-            "2223150": { voornaam: "Felix", achternaam: "van Loon" },
-            "2425196": { voornaam: "Mika", achternaam: "Snoep" },
-            "2324160": { voornaam: "Thibeau", achternaam: "Willemsen" },
-            "2324240": { voornaam: "Luuk", achternaam: "Vogelaar" },
-            "2324154": { voornaam: "Toon", achternaam: "Visser" },
-            "2324047": { voornaam: "Aurelius", achternaam: "Fielmich" },
-            "Yannick": { voornaam: "Yannick", achternaam: "Brand" },
-            "yannick": { voornaam: "Yannick", achternaam: "Brand" },
-            "2223195": { voornaam: "Toby", achternaam: "Sibum" },
-            "2324100": { voornaam: "Emily", achternaam: "van Panhuys" },
-            "2324061": { voornaam: "Jack", achternaam: "Hoytema van Konijnenburg" },
-            "2324021": { voornaam: "Emma", achternaam: "Boetzelaer" },
-            "2324042": { voornaam: "Max", achternaam: "Drabbe" },
-            "2324044": { voornaam: "Berk", achternaam: "Efe" },
-            "2324054": { voornaam: "Ties", achternaam: "Helming" },
-            "2324059": { voornaam: "Alette", achternaam: "Hoogeweegen" },
-            "2324065": { voornaam: "Sam", achternaam: "Jordan" },
-            "2324068": { voornaam: "Luc", achternaam: "Karman" },
-            "2324071": { voornaam: "Vivian", achternaam: "de Kock" },
-            "2324074": { voornaam: "Josephine", achternaam: "Koopman" },
-            "2324081": { voornaam: "Josephine", achternaam: "de Lint" },
-            "2324085": { voornaam: "Minte", achternaam: "Luttikhuis" },
-            "2324103": { voornaam: "Mats", achternaam: "Pijsel" },
-            "2324105": { voornaam: "Norah", achternaam: "van de Poppe" },
-            "2324109": { voornaam: "Olivia", achternaam: "van Raad" },
-            "2324114": { voornaam: "Eline", achternaam: "de Rijck van der Gracht" },
-            "2324128": { voornaam: "Casper", achternaam: "Segboer" },
-            "2324129": { voornaam: "Anne-May", achternaam: "Smits" },
-            "2324134": { voornaam: "Frederique", achternaam: "Steenman" },
-            "2324137": { voornaam: "Lev", achternaam: "Stellingwerff" },
-            "2324147": { voornaam: "Philein", achternaam: "van Trigt" },
-            "2324152": { voornaam: "Roemer", achternaam: "Visscher" },
-            "2324158": { voornaam: "Charlie", achternaam: "Westerhuis" },
-            "2324208": { voornaam: "Aafke", achternaam: "Hovens" },
-            "2324225": { voornaam: "Sara", achternaam: "Romijn" },
-            "2324233": { voornaam: "Thomas", achternaam: "Timmermans" },
-            "2324237": { voornaam: "Ivo", achternaam: "Velkov" },
-            "2324238": { voornaam: "Floris", achternaam: "Verheijen" },
-            "2324263": { voornaam: "Bloem", achternaam: "ter Veen" },
-            "2425213": { voornaam: "Tim", achternaam: "Vellinga" },
-            "2425250": { voornaam: "Mick", achternaam: "van Dooren" },
-            "2324028": { voornaam: "Elise", achternaam: "Buijn" },
-            "2324004": { voornaam: "Veerle", achternaam: "Alink" },
-            "2324217": { voornaam: "Puck", achternaam: "Nederstigt" },
-            "2324122": { voornaam: "Lyse", achternaam: "Sandberg" },
-            "2324021": { voornaam: "Emma", achternaam: "Boetzelaer" },
-            "2324236": { voornaam: "Bloem", achternaam: "ter Veen" },
-            "2425218": { voornaam: "Joris", achternaam: "Vink" },
-            "2324144": { voornaam: "Thijs", achternaam: "Takahashi" },
-            "2324211": { voornaam: "Bram", achternaam: "Keizer" },
-            "2425127": { voornaam: "Timme", achternaam: "Kusters" },
-            "2324032": { voornaam: "Bente", achternaam: "van der Burg" },
-            "2324128": { voornaam: "Casper", achternaam: "Segboer" },
-            "2324103": { voornaam: "Mats", achternaam: "Pijsel" },
-            "sjoerd": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "Sjoerd": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "AKS": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "aks": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "2425243": { voornaam: "Tijn", achternaam: "van der Zwaag" },
-            "2223125": { voornaam: "Mick", achternaam: "Kerkhof" },
-            "2122162": { voornaam: "Mick", achternaam: "Huber" },
-            "2425189": { voornaam: "Mick", achternaam: "Schoe" },
-            "2425133": { voornaam: "Mick", achternaam: "Lugtenberg" },
-            "2425250": { voornaam: "Mick", achternaam: "van Dooren" },
-            "2324051": { voornaam: "Felix", achternaam: "Greving" },
-            "2324015": { voornaam: "Niels", achternaam: "Beijer" },
-            "ksh": { voornaam: "KSH", achternaam: "" },
-            "2324071": { voornaam: "Vivian", achternaam: "de Kock" }
-
-        };
-
-        const inspirationalMessages = [
-    "Ontdek de magie van gamen op Games.BenjaminTjoa.com.",
-    "Eén klik verwijderd van eindeloos plezier.",
-    "Games die jouw wereld vullen, zonder afleiding.",
-    "Betoverend eenvoudig, volledig in je scherm.",
-    "Duik in een wereld vol mogelijkheden, vrij van afleiding.",
-    "Puur gamen, zonder compromissen.",
-    "Elke game die je zoekt, alles op één plek.",
-    "Kies, klik en speel. Zo eenvoudig is het.",
-    "Magisch ontworpen voor ultiem speelplezier.",
-    "Game fullscreen, advertentievrij en klaar voor avontuur.",
-    "Laat je meeslepen door de magie van elk spel.",
-    "Een heel nieuwe manier van spelen, advertentievrij.",
-    "Elk spel binnen handbereik, alles op één plek.",
-    "Games zonder ruis. Gewoon puur plezier.",
-    "Full-screen, vol actie en altijd vrij van advertenties.",
-    "Speel zoals je wilt, zonder afleiding.",
-    "Simpel. Stijlvol. Magisch speelbaar.",
-    "Verlies jezelf in een advertentievrije wereld.",
-    "De beste games, fullscreen en alles op één plek.",
-    "Games die gewoon werken. Altijd en overal.",
-    "Beleef pure eenvoud, elk moment opnieuw.",
-    "Stap binnen in de magie van Games.BenjaminTjoa.com.",
-    "Zo moeiteloos als klikken, zo verslavend als het spel zelf.",
-    "Eenvoudig in opzet, groots in speelplezier.",
-    "Kies je avontuur, zonder advertenties.",
-    "Full-screen speelplezier, vrij van ruis.",
-    "Voor de gamers die enkel het beste willen.",
-    "Games die jouw scherm tot leven brengen.",
-    "Elke klik brengt een nieuwe ervaring.",
-    "Ontworpen voor elke gamer, ieder moment.",
-    "Games waar je geen genoeg van krijgt.",
-    "Voor alle soorten gamers, altijd vrij van ruis.",
-    "Advertenties zijn nergens te bekennen, alleen magisch spelplezier.",
-    "Zodra je speelt, begin je aan een avontuur.",
-    "Verken alles. Eén klik, en je bent klaar.",
-    "Alle games, alles op één magische plek.",
-    "Puur spel, zonder ruis of onderbrekingen.",
-    "Gamen zoals het hoort, fullscreen en zonder reclame.",
-    "De magie begint zodra je klikt.",
-    "Eenvoud in design, groots in plezier.",
-    "Altijd advertentievrij, altijd fullscreen.",
-    "Jouw plek voor alles wat spelen leuk maakt.",
-    "Direct en simpel, zonder gedoe.",
-    "Elk spel opent een nieuw avontuur.",
-    "Stap in de magie. Speel waar je wilt.",
-    "Games zonder afleiding, vol actie.",
-    "Meer tijd om te spelen, zonder onderbrekingen.",
-    "Elke game die je zoekt, alles op één plek.",
-    "Altijd klaar, altijd zonder reclame.",
-    "Een magische speelervaring op jouw scherm.",
-    "Laat je meeslepen zonder ruis, puur plezier.",
-    "Game zonder gedoe, altijd fullscreen.",
-    "Advertentievrij gamen, in volle schermgrootte.",
-    "Jouw wereld van games begint hier, alles op één plek.",
-    "De beste games, eenvoudig en magisch.",
-    "Gamen in zijn puurste vorm, full-screen en zonder ruis.",
-    "Speel direct, zonder afleiding.",
-    "Verlies jezelf in magische gameplay.",
-    "Kies jouw avontuur, wij zorgen voor de magie.",
-    "Alles wat je zoekt, alles op één plek.",
-    "Van start tot finish, zonder afleiding.",
-    "Waar spelen echt vrij voelt.",
-    "Ontdek de magie van advertentievrij gamen.",
-    "Je favoriete games, moeiteloos fullscreen.",
-    "Voor de gamers die het beste verdienen.",
-    "Een serene omgeving voor puur speelplezier.",
-    "Een klik verwijderd van je nieuwe avontuur.",
-    "Laat je scherm magisch tot leven komen.",
-    "Advertentievrij, zonder gedoe. Alles op één plek.",
-    "Vind je plezier, keer op keer.",
-    "Elk spel, elk moment, altijd advertentievrij.",
-    "Gamen zonder grenzen. Fullscreen en puur.",
-    "Verken, speel, en laat je verrassen.",
-    "Magie in elke klik, spel na spel.",
-    "Stap binnen en speel zonder afleiding.",
-    "Alle games die je wilt, alles op één plek.",
-    "Simpel en elegant, zonder reclame.",
-    "Voor de gamers die puur plezier zoeken.",
-    "Full-screen speelplezier, altijd en overal.",
-    "Laat je meeslepen door ongeëvenaarde gameplay.",
-    "Voorbij woorden. Puur magisch spelplezier.",
-    "Advertentievrij, vanaf de eerste klik.",
-    "Meer tijd om te spelen, minder tijd om te zoeken.",
-    "Jouw avontuur wacht, zonder ruis.",
-    "Games die voor zich spreken, alles op één plek.",
-    "De magie begint zodra je binnenstapt.",
-    "Game direct, zonder onderbrekingen.",
-    "Eén plek. Alles wat je zoekt in games.",
-    "Beleef de magie van advertentievrij gamen.",
-    "Jouw scherm, jouw regels, zonder reclame.",
-    "Full-screen magie, vrij van afleidingen.",
-    "Alle topgames, perfect georganiseerd.",
-    "Een serene omgeving voor pure fun.",
-    "Gamen zoals het hoort, zonder compromissen.",
-    "Elke klik is puur plezier.",
-    "Laat niets je afleiden. Fullscreen en advertentievrij.",
-    "Ontdek wat spelen echt bijzonder maakt.",
-    "Meer tijd voor plezier, zonder onderbrekingen.",
-    "Elke game, alles op één plek.",
-    "Het enige platform dat je nodig hebt, vol magie."
-        ];
-
-        function getRandomColor() {
-            const rand = Math.random();
-            if (rand < 0.48) return '#007AFF';
-            if (rand < 0.96) return '#FF2D55';
-            if (rand < 0.9989) return '#FFCC00';
-            if (rand < 0.999) return '#AF52DE';
-            return '#34C759';
-        }
-
-        function getRandomMessage(messages) {
-            const randomIndex = Math.floor(Math.random() * messages.length);
-            return messages[randomIndex];
-        }
-
-        function displayInspirationalMessage() {
-            const messageElement = document.getElementById('inspirational-message');
-            const message = getRandomMessage(inspirationalMessages);
-            const color = getRandomColor();
-            messageElement.textContent = message;
-            messageElement.style.color = color;
-        }
-
-        function verifyLeerling() {
-            const leerlingnummer = document.getElementById('leerlingnummer').value.toLowerCase();
-            const wachtwoord = document.getElementById('wachtwoord').value.toLowerCase();
-            const messageElement = document.getElementById('message');
-            const leerling = leerlingen[leerlingnummer];
-
-            if (leerling && (
-                wachtwoord === 'ecolle' || 
-                wachtwoord === leerlingnummer || 
-                wachtwoord === leerling.voornaam.toLowerCase() || 
-                wachtwoord === leerling.achternaam.toLowerCase() || 
-                wachtwoord === `${leerling.voornaam.toLowerCase()} ${leerling.achternaam.toLowerCase()}`
-            )) {
-                document.getElementById('login-screen').style.display = 'none';
-                const welcomeScreen = document.getElementById('welcome-screen');
-                const welcomeMessage = document.getElementById('welcome-message');
-                welcomeScreen.style.display = 'flex';
-                welcomeMessage.innerHTML = '';
-                
-                const fullName = `<span class="rainbow-text">${leerling.voornaam} ${leerling.achternaam}</span>`;
-                welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
-                const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
-                setTimeout(() => typeWriter(`Wat mooi dat je Games.BenjaminTjoa.com gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
-            } else {
-                messageElement.textContent = 'Deze website is eigenlijk alleen voor leerlingen uit 2E. Mocht je toch een account willen aanmaken dan kan je een mail sturen naar: games@benjamintjoa.com.';
+        function showPopup() {
+            const randomNumber = Math.floor(Math.random() * 31) + 1;
+            if (randomNumber === 25) {
+                document.getElementById('popup').style.display = 'flex';
             }
         }
 
-        function typeWriter(text, element, index) {
-            if (index < text.length) {
-                element.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(() => typeWriter(text, element, index), 50);
+        document.getElementById('close-popup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        document.getElementById('site-title').addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (this.classList.contains('rainbow-text')) {
+                this.classList.remove('rainbow-text');
             } else {
-                setTimeout(() => {
-                    document.getElementById('welcome-screen').style.display = 'none';
-                    document.getElementById('gamesSection').style.display = 'block';
-                }, 1000);
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            const leerlingnummerField = document.getElementById('leerlingnummer');
-            const wachtwoordField = document.getElementById('wachtwoord');
-            const loginButton = document.getElementById('loginButton');
-
-            if (e.key === 'Enter') {
-                if (document.activeElement === leerlingnummerField) {
-                    wachtwoordField.focus();
-                } else if (document.activeElement === wachtwoordField) {
-                    loginButton.click();
-                }
+                this.classList.add('rainbow-text');
             }
         });
 
-        window.onload = function() {
-            displayInspirationalMessage();
-        };
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('.game-card') || e.target.closest('#site-title')) return;
+            const currentColor = window.getComputedStyle(document.body).backgroundColor;
+            if (currentColor === "rgb(0, 0, 0)") {
+                document.body.style.backgroundColor = "#0D102D";
+                document.querySelectorAll(".game-card").forEach(function(card) {
+                    card.style.backgroundColor = "#fff";
+                    const title = card.querySelector(".game-title");
+                    if (title) {
+                        title.style.color = "#1d1d1f";
+                    }
+                });
+            } else {
+                document.body.style.backgroundColor = "#000000";
+                document.querySelectorAll(".game-card").forEach(function(card) {
+                    card.style.backgroundColor = "#0D102D";
+                    const title = card.querySelector(".game-title");
+                    if (title) {
+                        title.style.color = "#ffffff";
+                    }
+                });
+            }
+        });
+
+        window.onload = showPopup;
     </script>
 
 </body>
