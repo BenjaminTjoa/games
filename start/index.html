@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welkom bij Games.BenjaminTjoa.com</title>
   <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+  <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap" crossorigin="anonymous">
   <!-- Google Tag Manager -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
@@ -15,6 +16,7 @@
     gtag('js', new Date());
     gtag('config', 'G-HHY0YKD8VS');
   </script>
+  <!-- Firebase SDK's -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <script>
@@ -382,6 +384,10 @@
         const leerlingSnapshot = await database.ref('gebruikers/' + loggedInUser).once('value');
         if (leerlingSnapshot.exists()) {
           const leerling = leerlingSnapshot.val();
+          const huidigeLoginTeller = leerling.loginTeller || 0;
+          await database.ref('gebruikers/' + loggedInUser).update({
+            loginTeller: huidigeLoginTeller + 1
+          });
           document.getElementById('login-screen').style.display = 'none';
           const welcomeScreen = document.getElementById('welcome-screen');
           const welcomeMessage = document.getElementById('welcome-message');
@@ -424,7 +430,6 @@
             await database.ref('gebruikers/' + leerlingnummer).update({
               loginTeller: huidigeLoginTeller + 1
             });
-
             if (document.getElementById("rememberMe").checked) {
               const duration = parseInt(document.getElementById("rememberDuration").value, 10);
               setCookie("loggedInUser", leerlingnummer, duration);
@@ -438,7 +443,6 @@
             welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
             const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
             setTimeout(() => typeWriter(`Wat mooi dat je Games.BenjaminTjoa.com gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
-
             startOnlineStatusUpdate(leerlingnummer);
           } else {
             console.log("Onjuist wachtwoord voor:", leerlingnummer);
