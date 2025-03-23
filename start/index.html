@@ -1,438 +1,492 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welkom bij Games.BenjaminTjoa.com</title>
-    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HHY0YKD8VS');
-</script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap');
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-        }
-        #login-screen {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        #login-box {
-            background-color: rgba(28, 28, 30, 0.8);
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 30px;
-            font-weight: 500;
-            font-size: 24px;
-        }
-        input {
-            display: block;
-            margin: 20px 0;
-            padding: 12px;
-            width: 100%;
-            background-color: rgba(118, 118, 128, 0.24);
-            border: none;
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        input::placeholder {
-            color: #8e8e93;
-        }
-        button {
-            background-color: #0A84FF;
-            color: white;
-            padding: 12px 0;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #007AFF;
-        }
-        #welcome-screen {
-            display: none;
-            background-color: black;
-            color: white;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            text-align: center;
-            flex-direction: column;
-        }
-        .rainbow-text {
-            font-weight: bold;
-            background: linear-gradient(90deg, #cb1333, #de45c1, #b96be2, #84a9e0, #23d43b, #d0bb08, #eb6d17);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-        #inspirational-message {
-            margin-top: 20px;
-            font-size: 16px;
-            text-align: center;
-        }
-        #gamesSection {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-        }
-        #gamesSection iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welkom bij Games.BenjaminTjoa.com</title>
+  <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap" crossorigin="anonymous">
+  <!-- Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HHY0YKD8VS');
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkSW2TdS1iBIByL6SwEpRuxwh-x-bso3Y",
+      authDomain: "games-benjamintjoa.firebaseapp.com",
+      projectId: "games-benjamintjoa",
+      storageBucket: "games-benjamintjoa.firebasestorage.app",
+      messagingSenderId: "178159157569",
+      appId: "1:178159157569:web:1199bb9ebb1d4dd8dfe1c0",
+      measurementId: "G-W5M19XFBZX",
+      databaseURL: "https://games-benjamintjoa-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+  </script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    #login-box {
+      background-color: rgba(28, 28, 30, 0.8);
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 300px;
+      height: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 30px;
+      font-weight: 500;
+      font-size: 24px;
+    }
+    input {
+      display: block;
+      margin: 20px 0;
+      padding: 12px;
+      width: 100%;
+      background-color: rgba(118, 118, 128, 0.24);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: #8e8e93;
+    }
+    button {
+      background-color: #0A84FF;
+      color: #fff;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #007AFF;
+    }
+    #rememberContainer {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    #rememberContainer input {
+      width: 16px;
+      height: 16px;
+    }
+    #rememberContainer select {
+      padding: 4px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      background-color: rgba(118, 118, 128, 0.24);
+      color: #fff;
+    }
+    #welcome-screen {
+      display: none;
+      background-color: #000;
+      color: #fff;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      text-align: center;
+      flex-direction: column;
+    }
+    .rainbow-text {
+      font-weight: bold;
+      background: linear-gradient(90deg, #cb1333, #de45c1, #b96be2, #84a9e0, #23d43b, #d0bb08, #eb6d17);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    #inspirational-message {
+      margin-top: 20px;
+      font-size: 16px;
+      text-align: center;
+    }
+    #gamesSection {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    #gamesSection iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-
-    <div id="login-screen">
-        <div id="login-box">
-            <h2>Inloggen</h2>
-            <input type="text" id="leerlingnummer" placeholder="Voer je leerlingnummer in">
-            <input type="password" id="wachtwoord" placeholder="Voer het wachtwoord in">
-            <button onclick="verifyLeerling()" id="loginButton">Log in</button>
-            <p id="message"></p>
-        </div>
-        <div id="inspirational-message"></div>
+  <div id="login-screen">
+    <div id="login-box">
+      <h2>Inloggen</h2>
+      <input type="text" id="leerlingnummer" placeholder="Voer je leerlingnummer in">
+      <input type="password" id="wachtwoord" placeholder="Voer het wachtwoord in">
+      <button id="loginButton">Log in</button>
+      <div id="rememberContainer">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Onthoud mij voor:</label>
+        <select id="rememberDuration">
+          <option value="1">1 dag</option>
+          <option value="7">1 week</option>
+        </select>
+      </div>
+      <p id="message"></p>
     </div>
-    <div id="welcome-screen">
-        <div id="welcome-message"></div>
-    </div>
-    <div id="gamesSection">
-        <iframe src="https://cloud.benjamintjoa.com/games"></iframe>
-    </div>
+    <div id="inspirational-message"></div>
+  </div>
+  <div id="welcome-screen">
+    <div id="welcome-message"></div>
+  </div>
+  <div id="gamesSection">
+    <iframe src="https://cloud.benjamintjoa.com/games"></iframe>
+  </div>
 
-    <script>
-        const leerlingen = {
-            "2223069": { voornaam: "Linde", achternaam: "Constandse" },
-            "2223215": { voornaam: "Benjamin", achternaam: "Tjoa" },
-            "2324001": { voornaam: "Charlotte", achternaam: "Adema" },
-            "2324002": { voornaam: "Yfke", achternaam: "Agterhof" },
-            "2324005": { voornaam: "Elena", achternaam: "Al-Kinani" },
-            "2324011": { voornaam: "Olivia", achternaam: "Aznar-Oswald" },
-            "2324030": { voornaam: "Isa", achternaam: "Buijs" },
-            "2324033": { voornaam: "Kemal", achternaam: "Ceylan" },
-            "2324037": { voornaam: "Lotte", achternaam: "Costantin" },
-            "2324038": { voornaam: "Sara", achternaam: "Dekker" },
-            "2324048": { voornaam: "Sebastiaan", achternaam: "Filmer" },
-            "2324057": { voornaam: "Lumen", achternaam: "Hokstam" },
-            "2324064": { voornaam: "Loek", achternaam: "de Jonge" },
-            "2324084": { voornaam: "Taeke", achternaam: "van der Lugt" },
-            "2324091": { voornaam: "Merlijn", achternaam: "Massa" },
-            "2324110": { voornaam: "Fenna", achternaam: "Rasch" },
-            "2324116": { voornaam: "Sasha", achternaam: "Rodriguez" },
-            "2324121": { voornaam: "Hanna", achternaam: "van Ruiten" },
-            "2324130": { voornaam: "Olivier", achternaam: "Soyogul" },
-            "2324131": { voornaam: "Dexter", achternaam: "Speelman" },
-            "2324139": { voornaam: "Julian", achternaam: "Streefland" },
-            "2324150": { voornaam: "Anne-Louise", achternaam: "van Veen" },
-            "2324153": { voornaam: "Luc", achternaam: "Visser" },
-            "2324156": { voornaam: "Cas", achternaam: "Vrisekoop" },
-            "2324159": { voornaam: "Daniel", achternaam: "Westerkamp" },
-            "2324162": { voornaam: "Olivia", achternaam: "van der Wurff" },
-            "2324165": { voornaam: "Hanna", achternaam: "Zhang" },
-            "2324196": { voornaam: "Max", achternaam: "Carrière" },
-            "2324221": { voornaam: "David", achternaam: "Prinsen" },
-            "2324227": { voornaam: "Scott", achternaam: "Rusman" },
-            "2425294": { voornaam: "Toon", achternaam: "de Vrieze" },
-            "VRA": { voornaam: "Anita", achternaam: "de Vries" },
-            "Anita": { voornaam: "Anita", achternaam: "de Vries" },
-            "anita": { voornaam: "Anita", achternaam: "de Vries" },
-            "Anita de Vries": { voornaam: "Anita", achternaam: "de Vries" },
-            "2223251": { voornaam: "Aiden", achternaam: "van Zomeren" },
-            "2223062": { voornaam: "Anvay", achternaam: "Choudhary" },
-            "2324029": { voornaam: "Cas", achternaam: "Buijs" },
-            "2223187": { voornaam: "Jelle", achternaam: "van Ruiten" },
-            "Annabelle": { voornaam: "Annabelle", achternaam: "Tjoa" },
-            "2223150": { voornaam: "Felix", achternaam: "van Loon" },
-            "2425196": { voornaam: "Mika", achternaam: "Snoep" },
-            "2324160": { voornaam: "Thibeau", achternaam: "Willemsen" },
-            "2324240": { voornaam: "Luuk", achternaam: "Vogelaar" },
-            "2324154": { voornaam: "Toon", achternaam: "Visser" },
-            "2324047": { voornaam: "Aurelius", achternaam: "Fielmich" },
-            "Yannick": { voornaam: "Yannick", achternaam: "Brand" },
-            "yannick": { voornaam: "Yannick", achternaam: "Brand" },
-            "2223195": { voornaam: "Toby", achternaam: "Sibum" },
-            "2324100": { voornaam: "Emily", achternaam: "van Panhuys" },
-            "2324061": { voornaam: "Jack", achternaam: "Hoytema van Konijnenburg" },
-            "2324021": { voornaam: "Emma", achternaam: "Boetzelaer" },
-            "2324042": { voornaam: "Max", achternaam: "Drabbe" },
-            "2324044": { voornaam: "Berk", achternaam: "Efe" },
-            "2324054": { voornaam: "Ties", achternaam: "Helming" },
-            "2324059": { voornaam: "Alette", achternaam: "Hoogeweegen" },
-            "2324065": { voornaam: "Sam", achternaam: "Jordan" },
-            "2324068": { voornaam: "Luc", achternaam: "Karman" },
-            "2324071": { voornaam: "Vivian", achternaam: "de Kock" },
-            "2324074": { voornaam: "Josephine", achternaam: "Koopman" },
-            "2324081": { voornaam: "Josephine", achternaam: "de Lint" },
-            "2324085": { voornaam: "Minte", achternaam: "Luttikhuis" },
-            "2324103": { voornaam: "Mats", achternaam: "Pijsel" },
-            "2324105": { voornaam: "Norah", achternaam: "van de Poppe" },
-            "2324109": { voornaam: "Olivia", achternaam: "van Raad" },
-            "2324114": { voornaam: "Eline", achternaam: "de Rijck van der Gracht" },
-            "2324128": { voornaam: "Casper", achternaam: "Segboer" },
-            "2324129": { voornaam: "Anne-May", achternaam: "Smits" },
-            "2324134": { voornaam: "Frederique", achternaam: "Steenman" },
-            "2324137": { voornaam: "Lev", achternaam: "Stellingwerff" },
-            "2324147": { voornaam: "Philein", achternaam: "van Trigt" },
-            "2324152": { voornaam: "Roemer", achternaam: "Visscher" },
-            "2324158": { voornaam: "Charlie", achternaam: "Westerhuis" },
-            "2324208": { voornaam: "Aafke", achternaam: "Hovens" },
-            "2324225": { voornaam: "Sara", achternaam: "Romijn" },
-            "2324233": { voornaam: "Thomas", achternaam: "Timmermans" },
-            "2324237": { voornaam: "Ivo", achternaam: "Velkov" },
-            "2324238": { voornaam: "Floris", achternaam: "Verheijen" },
-            "2324263": { voornaam: "Bloem", achternaam: "ter Veen" },
-            "2425213": { voornaam: "Tim", achternaam: "Vellinga" },
-            "2425250": { voornaam: "Mick", achternaam: "van Dooren" },
-            "2324028": { voornaam: "Elise", achternaam: "Buijn" },
-            "2324004": { voornaam: "Veerle", achternaam: "Alink" },
-            "2324217": { voornaam: "Puck", achternaam: "Nederstigt" },
-            "2324122": { voornaam: "Lyse", achternaam: "Sandberg" },
-            "2324021": { voornaam: "Emma", achternaam: "Boetzelaer" },
-            "2324236": { voornaam: "Bloem", achternaam: "ter Veen" },
-            "2425218": { voornaam: "Joris", achternaam: "Vink" },
-            "2324144": { voornaam: "Thijs", achternaam: "Takahashi" },
-            "2324211": { voornaam: "Bram", achternaam: "Keizer" },
-            "2425127": { voornaam: "Timme", achternaam: "Kusters" },
-            "2324032": { voornaam: "Bente", achternaam: "van der Burg" },
-            "2324128": { voornaam: "Casper", achternaam: "Segboer" },
-            "2324103": { voornaam: "Mats", achternaam: "Pijsel" },
-            "sjoerd": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "Sjoerd": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "AKS": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "aks": { voornaam: "Sjoerd", achternaam: "van Aken" },
-            "2425243": { voornaam: "Tijn", achternaam: "van der Zwaag" },
-            "2223125": { voornaam: "Mick", achternaam: "Kerkhof" },
-            "2122162": { voornaam: "Mick", achternaam: "Huber" },
-            "2425189": { voornaam: "Mick", achternaam: "Schoe" },
-            "2425133": { voornaam: "Mick", achternaam: "Lugtenberg" },
-            "2425250": { voornaam: "Mick", achternaam: "van Dooren" },
-            "2324051": { voornaam: "Felix", achternaam: "Greving" },
-            "2324015": { voornaam: "Niels", achternaam: "Beijer" },
-            "ksh": { voornaam: "KSH", achternaam: "" },
-            "2324071": { voornaam: "Vivian", achternaam: "de Kock" }
-
-        };
-
-        const inspirationalMessages = [
-    "Ontdek de magie van gamen op Games.BenjaminTjoa.com.",
-    "Eén klik verwijderd van eindeloos plezier.",
-    "Games die jouw wereld vullen, zonder afleiding.",
-    "Betoverend eenvoudig, volledig in je scherm.",
-    "Duik in een wereld vol mogelijkheden, vrij van afleiding.",
-    "Puur gamen, zonder compromissen.",
-    "Elke game die je zoekt, alles op één plek.",
-    "Kies, klik en speel. Zo eenvoudig is het.",
-    "Magisch ontworpen voor ultiem speelplezier.",
-    "Game fullscreen, advertentievrij en klaar voor avontuur.",
-    "Laat je meeslepen door de magie van elk spel.",
-    "Een heel nieuwe manier van spelen, advertentievrij.",
-    "Elk spel binnen handbereik, alles op één plek.",
-    "Games zonder ruis. Gewoon puur plezier.",
-    "Full-screen, vol actie en altijd vrij van advertenties.",
-    "Speel zoals je wilt, zonder afleiding.",
-    "Simpel. Stijlvol. Magisch speelbaar.",
-    "Verlies jezelf in een advertentievrije wereld.",
-    "De beste games, fullscreen en alles op één plek.",
-    "Games die gewoon werken. Altijd en overal.",
-    "Beleef pure eenvoud, elk moment opnieuw.",
-    "Stap binnen in de magie van Games.BenjaminTjoa.com.",
-    "Zo moeiteloos als klikken, zo verslavend als het spel zelf.",
-    "Eenvoudig in opzet, groots in speelplezier.",
-    "Kies je avontuur, zonder advertenties.",
-    "Full-screen speelplezier, vrij van ruis.",
-    "Voor de gamers die enkel het beste willen.",
-    "Games die jouw scherm tot leven brengen.",
-    "Elke klik brengt een nieuwe ervaring.",
-    "Ontworpen voor elke gamer, ieder moment.",
-    "Games waar je geen genoeg van krijgt.",
-    "Voor alle soorten gamers, altijd vrij van ruis.",
-    "Advertenties zijn nergens te bekennen, alleen magisch spelplezier.",
-    "Zodra je speelt, begin je aan een avontuur.",
-    "Verken alles. Eén klik, en je bent klaar.",
-    "Alle games, alles op één magische plek.",
-    "Puur spel, zonder ruis of onderbrekingen.",
-    "Gamen zoals het hoort, fullscreen en zonder reclame.",
-    "De magie begint zodra je klikt.",
-    "Eenvoud in design, groots in plezier.",
-    "Altijd advertentievrij, altijd fullscreen.",
-    "Jouw plek voor alles wat spelen leuk maakt.",
-    "Direct en simpel, zonder gedoe.",
-    "Elk spel opent een nieuw avontuur.",
-    "Stap in de magie. Speel waar je wilt.",
-    "Games zonder afleiding, vol actie.",
-    "Meer tijd om te spelen, zonder onderbrekingen.",
-    "Elke game die je zoekt, alles op één plek.",
-    "Altijd klaar, altijd zonder reclame.",
-    "Een magische speelervaring op jouw scherm.",
-    "Laat je meeslepen zonder ruis, puur plezier.",
-    "Game zonder gedoe, altijd fullscreen.",
-    "Advertentievrij gamen, in volle schermgrootte.",
-    "Jouw wereld van games begint hier, alles op één plek.",
-    "De beste games, eenvoudig en magisch.",
-    "Gamen in zijn puurste vorm, full-screen en zonder ruis.",
-    "Speel direct, zonder afleiding.",
-    "Verlies jezelf in magische gameplay.",
-    "Kies jouw avontuur, wij zorgen voor de magie.",
-    "Alles wat je zoekt, alles op één plek.",
-    "Van start tot finish, zonder afleiding.",
-    "Waar spelen echt vrij voelt.",
-    "Ontdek de magie van advertentievrij gamen.",
-    "Je favoriete games, moeiteloos fullscreen.",
-    "Voor de gamers die het beste verdienen.",
-    "Een serene omgeving voor puur speelplezier.",
-    "Een klik verwijderd van je nieuwe avontuur.",
-    "Laat je scherm magisch tot leven komen.",
-    "Advertentievrij, zonder gedoe. Alles op één plek.",
-    "Vind je plezier, keer op keer.",
-    "Elk spel, elk moment, altijd advertentievrij.",
-    "Gamen zonder grenzen. Fullscreen en puur.",
-    "Verken, speel, en laat je verrassen.",
-    "Magie in elke klik, spel na spel.",
-    "Stap binnen en speel zonder afleiding.",
-    "Alle games die je wilt, alles op één plek.",
-    "Simpel en elegant, zonder reclame.",
-    "Voor de gamers die puur plezier zoeken.",
-    "Full-screen speelplezier, altijd en overal.",
-    "Laat je meeslepen door ongeëvenaarde gameplay.",
-    "Voorbij woorden. Puur magisch spelplezier.",
-    "Advertentievrij, vanaf de eerste klik.",
-    "Meer tijd om te spelen, minder tijd om te zoeken.",
-    "Jouw avontuur wacht, zonder ruis.",
-    "Games die voor zich spreken, alles op één plek.",
-    "De magie begint zodra je binnenstapt.",
-    "Game direct, zonder onderbrekingen.",
-    "Eén plek. Alles wat je zoekt in games.",
-    "Beleef de magie van advertentievrij gamen.",
-    "Jouw scherm, jouw regels, zonder reclame.",
-    "Full-screen magie, vrij van afleidingen.",
-    "Alle topgames, perfect georganiseerd.",
-    "Een serene omgeving voor pure fun.",
-    "Gamen zoals het hoort, zonder compromissen.",
-    "Elke klik is puur plezier.",
-    "Laat niets je afleiden. Fullscreen en advertentievrij.",
-    "Ontdek wat spelen echt bijzonder maakt.",
-    "Meer tijd voor plezier, zonder onderbrekingen.",
-    "Elke game, alles op één plek.",
-    "Het enige platform dat je nodig hebt, vol magie."
-        ];
-
-        function getRandomColor() {
-            const rand = Math.random();
-            if (rand < 0.48) return '#007AFF';
-            if (rand < 0.96) return '#FF2D55';
-            if (rand < 0.9989) return '#FFCC00';
-            if (rand < 0.999) return '#AF52DE';
-            return '#34C759';
+  <script>
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+      const name = cname + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
         }
+      }
+      return "";
+    }
 
-        function getRandomMessage(messages) {
-            const randomIndex = Math.floor(Math.random() * messages.length);
-            return messages[randomIndex];
+    const inspirationalMessages = [
+      "Ontdek de magie van gamen op Games.BenjaminTjoa.com.",
+      "Eén klik verwijderd van eindeloos plezier.",
+      "Games die jouw wereld vullen, zonder afleiding.",
+      "Betoverend eenvoudig, volledig in je scherm.",
+      "Duik in een wereld vol mogelijkheden, vrij van afleiding.",
+      "Puur gamen, zonder compromissen.",
+      "Elke game die je zoekt, alles op één plek.",
+      "Kies, klik en speel. Zo eenvoudig is het.",
+      "Magisch ontworpen voor ultiem speelplezier.",
+      "Game fullscreen, advertentievrij en klaar voor avontuur.",
+      "Laat je meeslepen door de magie van elk spel.",
+      "Een heel nieuwe manier van spelen, advertentievrij.",
+      "Elk spel binnen handbereik, alles op één plek.",
+      "Games zonder ruis. Gewoon puur plezier.",
+      "Full-screen, vol actie en altijd vrij van advertenties.",
+      "Speel zoals je wilt, zonder afleiding.",
+      "Simpel. Stijlvol. Magisch speelbaar.",
+      "Verlies jezelf in een advertentievrije wereld.",
+      "De beste games, fullscreen en alles op één plek.",
+      "Games die gewoon werken. Altijd en overal.",
+      "Beleef pure eenvoud, elk moment opnieuw.",
+      "Stap binnen in de magie van Games.BenjaminTjoa.com.",
+      "Zo moeiteloos als klikken, zo verslavend als het spel zelf.",
+      "Eenvoudig in opzet, groots in speelplezier.",
+      "Kies je avontuur, zonder advertenties.",
+      "Full-screen speelplezier, vrij van ruis.",
+      "Voor de gamers die enkel het beste willen.",
+      "Games die jouw scherm tot leven brengen.",
+      "Elke klik brengt een nieuwe ervaring.",
+      "Ontworpen voor elke gamer, ieder moment.",
+      "Games waar je geen genoeg van krijgt.",
+      "Voor alle soorten gamers, altijd vrij van ruis.",
+      "Advertenties zijn nergens te bekennen, alleen magisch spelplezier.",
+      "Zodra je speelt, begin je aan een avontuur.",
+      "Verken alles. Eén klik, en je bent klaar.",
+      "Alle games, alles op één magische plek.",
+      "Puur spel, zonder ruis of onderbrekingen.",
+      "Gamen zoals het hoort, fullscreen en zonder reclame.",
+      "De magie begint zodra je klikt.",
+      "Eenvoud in design, groots in plezier.",
+      "Altijd advertentievrij, altijd fullscreen.",
+      "Jouw plek voor alles wat spelen leuk maakt.",
+      "Direct en simpel, zonder gedoe.",
+      "Elk spel opent een nieuw avontuur.",
+      "Stap in de magie. Speel waar je wilt.",
+      "Games zonder afleiding, vol actie.",
+      "Meer tijd om te spelen, zonder onderbrekingen.",
+      "Elke game die je zoekt, alles op één plek.",
+      "Altijd klaar, altijd zonder reclame.",
+      "Een magische speelervaring op jouw scherm.",
+      "Laat je meeslepen zonder ruis, puur plezier.",
+      "Game zonder gedoe, altijd fullscreen.",
+      "Advertentievrij gamen, in volle schermgrootte.",
+      "Jouw wereld van games begint hier, alles op één plek.",
+      "De beste games, eenvoudig en magisch.",
+      "Gamen in zijn puurste vorm, full-screen en zonder ruis.",
+      "Speel direct, zonder afleiding.",
+      "Verlies jezelf in magische gameplay.",
+      "Kies jouw avontuur, wij zorgen voor de magie.",
+      "Alles wat je zoekt, alles op één plek.",
+      "Van start tot finish, zonder afleiding.",
+      "Waar spelen echt vrij voelt.",
+      "Ontdek de magie van advertentievrij gamen.",
+      "Je favoriete games, moeiteloos fullscreen.",
+      "Voor de gamers die het beste verdienen.",
+      "Een serene omgeving voor puur speelplezier.",
+      "Een klik verwijderd van je nieuwe avontuur.",
+      "Laat je scherm magisch tot leven komen.",
+      "Advertentievrij, zonder gedoe. Alles op één plek.",
+      "Vind je plezier, keer op keer.",
+      "Elk spel, elk moment, altijd advertentievrij.",
+      "Gamen zonder grenzen. Fullscreen en puur.",
+      "Verken, speel, en laat je verrassen.",
+      "Magie in elke klik, spel na spel.",
+      "Stap binnen en speel zonder afleiding.",
+      "Alle games die je wilt, alles op één plek.",
+      "Simpel en elegant, zonder reclame.",
+      "Voor de gamers die puur plezier zoeken.",
+      "Full-screen speelplezier, altijd en overal.",
+      "Laat je meeslepen door ongeëvenaarde gameplay.",
+      "Voorbij woorden. Puur magisch spelplezier.",
+      "Advertentievrij, vanaf de eerste klik.",
+      "Meer tijd om te spelen, minder tijd om te zoeken.",
+      "Jouw avontuur wacht, zonder ruis.",
+      "Games die voor zich spreken, alles op één plek.",
+      "De magie begint zodra je binnenstapt.",
+      "Game direct, zonder onderbrekingen.",
+      "Eén plek. Alles wat je zoekt in games.",
+      "Beleef de magie van advertentievrij gamen.",
+      "Jouw scherm, jouw regels, zonder reclame.",
+      "Full-screen magie, vrij van afleidingen.",
+      "Alle topgames, perfect georganiseerd.",
+      "Een serene omgeving voor pure fun.",
+      "Gamen zoals het hoort, zonder compromissen.",
+      "Elke klik is puur plezier.",
+      "Laat niets je afleiden. Fullscreen en advertentievrij.",
+      "Ontdek wat spelen echt bijzonder maakt.",
+      "Meer tijd voor plezier, zonder onderbrekingen.",
+      "Elke game, alles op één plek.",
+      "Het enige platform dat je nodig hebt, vol magie."
+    ];
+
+    function getRandomColor() {
+      const rand = Math.random();
+      if (rand < 0.48) return '#007AFF';
+      if (rand < 0.96) return '#FF2D55';
+      if (rand < 0.9989) return '#FFCC00';
+      if (rand < 0.999) return '#AF52DE';
+      return '#34C759';
+    }
+
+    function getRandomMessage(messages) {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      return messages[randomIndex];
+    }
+
+    function displayInspirationalMessage() {
+      const messageElement = document.getElementById('inspirational-message');
+      const message = getRandomMessage(inspirationalMessages);
+      const color = getRandomColor();
+      messageElement.textContent = message;
+      messageElement.style.color = color;
+    }
+
+    function formatDate(date) {
+      const day = ("0" + date.getDate()).slice(-2);
+      const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
+    }
+
+    function formatTime(date) {
+      let hours = ("0" + date.getHours()).slice(-2);
+      let minutes = ("0" + date.getMinutes()).slice(-2);
+      let seconds = Math.floor(date.getSeconds() / 10) * 10;
+      seconds = ("0" + seconds).slice(-2);
+      return `${hours}:${minutes}:${seconds}`;
+    }
+
+    async function getCurrentTime() {
+      try {
+        const response = await fetch("https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam");
+        if (response.ok) {
+          const data = await response.json();
+          return new Date(data.dateTime);
+        } else {
+          return new Date();
         }
+      } catch (error) {
+        console.error("Time server error:", error);
+        return new Date();
+      }
+    }
 
-        function displayInspirationalMessage() {
-            const messageElement = document.getElementById('inspirational-message');
-            const message = getRandomMessage(inspirationalMessages);
-            const color = getRandomColor();
-            messageElement.textContent = message;
-            messageElement.style.color = color;
+    async function startOnlineStatusUpdate(leerlingnummer) {
+      const now = await getCurrentTime();
+      const currentSeconds = now.getSeconds();
+      const delay = (10 - (currentSeconds % 10)) * 1000;
+      setTimeout(async () => {
+        updateOnlineStatus(leerlingnummer);
+        setInterval(() => {
+          updateOnlineStatus(leerlingnummer);
+        }, 10000);
+      }, delay);
+    }
+
+    async function updateOnlineStatus(leerlingnummer) {
+      const now = await getCurrentTime();
+      const datum = formatDate(now);
+      const tijd = formatTime(now);
+      console.log("Updating online status voor:", leerlingnummer, datum, tijd);
+      const userRef = database.ref('gebruikers/' + leerlingnummer);
+      userRef.update({
+        laatsteOnlineDatum: datum,
+        laatsteOnlineTijd: tijd
+      });
+    }
+
+    async function autoLogin(loggedInUser) {
+      console.log("Auto login voor:", loggedInUser);
+      try {
+        const leerlingSnapshot = await database.ref('gebruikers/' + loggedInUser).once('value');
+        if (leerlingSnapshot.exists()) {
+          const leerling = leerlingSnapshot.val();
+          document.getElementById('login-screen').style.display = 'none';
+          const welcomeScreen = document.getElementById('welcome-screen');
+          const welcomeMessage = document.getElementById('welcome-message');
+          welcomeScreen.style.display = 'flex';
+          welcomeMessage.innerHTML = '';
+          const fullName = `<span class="rainbow-text">${leerling.voornaam} ${leerling.achternaam}</span>`;
+          welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
+          const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
+          setTimeout(() => typeWriter(`Wat mooi dat je Games.BenjaminTjoa.com gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
+          startOnlineStatusUpdate(loggedInUser);
         }
+      } catch (error) {
+        console.error("Auto login fout:", error);
+      }
+    }
 
-        function verifyLeerling() {
-            const leerlingnummer = document.getElementById('leerlingnummer').value.toLowerCase();
-            const wachtwoord = document.getElementById('wachtwoord').value.toLowerCase();
-            const messageElement = document.getElementById('message');
-            const leerling = leerlingen[leerlingnummer];
+    async function verifyLeerling() {
+      const leerlingnummer = document.getElementById('leerlingnummer').value.trim();
+      const wachtwoord = document.getElementById('wachtwoord').value.trim().toLowerCase();
+      const messageElement = document.getElementById('message');
+      
+      console.log("Login poging voor:", leerlingnummer);
+      if (!leerlingnummer || !wachtwoord) {
+        messageElement.textContent = "Vul alstublieft zowel leerlingnummer als wachtwoord in.";
+        return;
+      }
+      
+      try {
+        const leerlingSnapshot = await database.ref('gebruikers/' + leerlingnummer).once('value');
+        if (leerlingSnapshot.exists()) {
+          const leerling = leerlingSnapshot.val();
+          if (
+            wachtwoord === 'ecolle' ||
+            wachtwoord === leerling.voornaam.toLowerCase() ||
+            wachtwoord === leerling.achternaam.toLowerCase() ||
+            wachtwoord === (leerling.voornaam.toLowerCase() + ' ' + leerling.achternaam.toLowerCase())
+          ) {
+            console.log("Login succesvol voor:", leerlingnummer);
+            const huidigeLoginTeller = leerling.loginTeller || 0;
+            await database.ref('gebruikers/' + leerlingnummer).update({
+              loginTeller: huidigeLoginTeller + 1
+            });
 
-            if (leerling && (
-                wachtwoord === 'ecolle' || 
-                wachtwoord === leerlingnummer || 
-                wachtwoord === leerling.voornaam.toLowerCase() || 
-                wachtwoord === leerling.achternaam.toLowerCase() || 
-                wachtwoord === `${leerling.voornaam.toLowerCase()} ${leerling.achternaam.toLowerCase()}`
-            )) {
-                document.getElementById('login-screen').style.display = 'none';
-                const welcomeScreen = document.getElementById('welcome-screen');
-                const welcomeMessage = document.getElementById('welcome-message');
-                welcomeScreen.style.display = 'flex';
-                welcomeMessage.innerHTML = '';
-                
-                const fullName = `<span class="rainbow-text">${leerling.voornaam} ${leerling.achternaam}</span>`;
-                welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
-                const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
-                setTimeout(() => typeWriter(`Wat mooi dat je Games.BenjaminTjoa.com gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
-            } else {
-                messageElement.textContent = 'Deze website is eigenlijk alleen voor leerlingen uit 2E. Mocht je toch een account willen aanmaken dan kan je een mail sturen naar: games@benjamintjoa.com.';
+            if (document.getElementById("rememberMe").checked) {
+              const duration = parseInt(document.getElementById("rememberDuration").value, 10);
+              setCookie("loggedInUser", leerlingnummer, duration);
             }
+            document.getElementById('login-screen').style.display = 'none';
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeScreen.style.display = 'flex';
+            welcomeMessage.innerHTML = '';
+            const fullName = `<span class="rainbow-text">${leerling.voornaam} ${leerling.achternaam}</span>`;
+            welcomeMessage.innerHTML = `Welkom ${fullName}!<br>`;
+            const randomWelcomeMessage = getRandomMessage(inspirationalMessages);
+            setTimeout(() => typeWriter(`Wat mooi dat je Games.BenjaminTjoa.com gebruikt! ${randomWelcomeMessage}`, welcomeMessage, 0), 1000);
+
+            startOnlineStatusUpdate(leerlingnummer);
+          } else {
+            console.log("Onjuist wachtwoord voor:", leerlingnummer);
+            messageElement.textContent = "Onjuist wachtwoord. Probeer het opnieuw.";
+          }
+        } else {
+          console.log("Leerling niet gevonden:", leerlingnummer);
+          messageElement.textContent = "Deze website is eigenlijk alleen voor leerlingen uit 2E. Mocht je toch een account willen, stuur een mail naar: games@benjamintjoa.com.";
         }
+      } catch (error) {
+        console.error("Fout bij login:", error);
+        messageElement.textContent = "Er is een fout opgetreden. Probeer het later opnieuw.";
+      }
+    }
 
-        function typeWriter(text, element, index) {
-            if (index < text.length) {
-                element.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(() => typeWriter(text, element, index), 50);
-            } else {
-                setTimeout(() => {
-                    document.getElementById('welcome-screen').style.display = 'none';
-                    document.getElementById('gamesSection').style.display = 'block';
-                }, 1000);
-            }
+    function typeWriter(text, element, index) {
+      if (index < text.length) {
+        element.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(() => typeWriter(text, element, index), 50);
+      } else {
+        setTimeout(() => {
+          document.getElementById('welcome-screen').style.display = 'none';
+          document.getElementById('gamesSection').style.display = 'block';
+        }, 1000);
+      }
+    }
+
+    document.getElementById('loginButton').addEventListener('click', verifyLeerling);
+    document.addEventListener('keydown', (e) => {
+      const leerlingnummerField = document.getElementById('leerlingnummer');
+      const wachtwoordField = document.getElementById('wachtwoord');
+      if (e.key === 'Enter') {
+        if (document.activeElement === leerlingnummerField) {
+          wachtwoordField.focus();
+        } else if (document.activeElement === wachtwoordField) {
+          verifyLeerling();
         }
+      }
+    });
 
-        document.addEventListener('keydown', (e) => {
-            const leerlingnummerField = document.getElementById('leerlingnummer');
-            const wachtwoordField = document.getElementById('wachtwoord');
-            const loginButton = document.getElementById('loginButton');
-
-            if (e.key === 'Enter') {
-                if (document.activeElement === leerlingnummerField) {
-                    wachtwoordField.focus();
-                } else if (document.activeElement === wachtwoordField) {
-                    loginButton.click();
-                }
-            }
-        });
-
-        window.onload = function() {
-            displayInspirationalMessage();
-        };
-    </script>
-
+    window.onload = function() {
+      displayInspirationalMessage();
+      const loggedInUser = getCookie("loggedInUser");
+      if (loggedInUser) {
+        autoLogin(loggedInUser);
+      }
+    };
+  </script>
 </body>
 </html>
