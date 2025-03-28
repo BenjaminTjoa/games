@@ -7,6 +7,8 @@
   <title>Admin Panel</title>
   <link rel="icon" href="/images/ico.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap" crossorigin="anonymous">
+  <!-- Font Awesome voor refresh icoon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Google Tag Manager -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHY0YKD8VS"></script>
   <script>
@@ -39,6 +41,18 @@
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #000;
       color: #fff;
+    }
+    .loader {
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     #login-screen {
       display: flex;
@@ -124,15 +138,17 @@
     .rainbow-wrapper {
       text-align: center;
       padding: 10px 20px;
+    }
+    .rainbow-title {
+      font-size: 32px;
+      font-weight: bold;
       background: linear-gradient(90deg, #cb1333, #de45c1, #b96be2, #84a9e0, #23d43b, #d0bb08, #eb6d17);
       -webkit-background-clip: text;
       background-clip: text;
-    }
-    .rainbow-wrapper h1 {
-      display: inline;
-      font-size: 32px;
-      font-weight: bold;
+      -webkit-text-fill-color: transparent;
       color: transparent;
+      cursor: default;
+      display: inline-block;
     }
     #top-row {
       display: flex;
@@ -151,6 +167,9 @@
       color: #007AFF;
       margin-top: 0;
       font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     #stats-row {
       display: flex;
@@ -171,6 +190,22 @@
     .stats-list::-webkit-scrollbar {
       display: none;
     }
+    .live-info {
+      font-size: 14px;
+      color: #aaa;
+    }
+    .live-info span.status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #34C759;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .user-info {
+      font-size: 14px;
+      color: #aaa;
+    }
     .online-user {
       margin: 5px 0;
       padding: 5px;
@@ -179,17 +214,61 @@
     .user-name {
       font-size: 18px;
     }
-    .user-info {
-      font-size: 14px;
-      color: #aaa;
-    }
-    .status-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background-color: #34C759;
+    .refresh-btn {
+      background-color: #FF9500;
+      border: none;
       border-radius: 50%;
-      margin-right: 5px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .refresh-btn:hover {
+      background-color: #FF9500;
+    }
+    .refresh-btn:active {
+      transform: scale(0.9);
+    }
+    .spinning {
+      animation: spin 1s linear infinite;
+    }
+    #popup-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 300px;
+    }
+    .popup-content.success {
+      border: 2px solid #34C759;
+    }
+    .popup-content.error {
+      border: 2px solid #FF2D55;
+    }
+    #popup-close {
+      margin-top: 15px;
+      background-color: #0A84FF;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -197,8 +276,8 @@
   <div id="login-screen">
     <div id="login-box">
       <h2>Inloggen</h2>
-      <input type="text" id="leerlingnummer" placeholder="Voer je leerlingnummer in">
-      <input type="password" id="wachtwoord" placeholder="Voer het wachtwoord in">
+      <input type="password" id="leerlingnummer" placeholder="Gebruikersnaam">
+      <input type="password" id="wachtwoord" placeholder="Wachtwoord">
       <button id="loginButton">Log in</button>
       <div id="rememberContainer">
         <input type="checkbox" id="rememberMe">
@@ -215,19 +294,22 @@
 
   <div id="admin-panel">
     <div class="rainbow-wrapper">
-      <h1>Admin Panel</h1>
-    </div>    
+      <h1 id="admin-title" class="rainbow-title">Admin Panel</h1>
+    </div>
     <div id="top-row">
       <div class="panel-section" id="nu-online-section">
-        <h2>Nu Online</h2>
-        <div id="online-users">
-        </div>
+        <h2>
+          Nu Online
+          <button id="refreshButton" class="refresh-btn"><i class="fas fa-arrow-rotate-right"></i></button>
+        </h2>
+        <div id="nuOnlineLoader" class="loader" style="display:none;"></div>
+        <div id="online-users"></div>
       </div>
       <div class="panel-section" id="add-user-section">
         <h2>Gebruiker Toevoegen</h2>
         <form id="add-user-form">
-          <input type="text" id="new-leerlingnummer" placeholder="Leerlingnummer" required>
           <input type="text" id="new-naam" placeholder="Naam" required>
+          <input type="text" id="new-leerlingnummer" placeholder="Leerlingnummer" required>
           <button type="submit">Toevoegen</button>
         </form>
       </div>
@@ -235,14 +317,21 @@
     <div id="stats-row">
       <div class="stats-section" id="online-today-section">
         <h2>Online Vandaag</h2>
-        <div id="online-today-list" class="stats-list">
-        </div>
+        <div id="onlineTodayLoader" class="loader" style="display:none;"></div>
+        <div id="online-today-list" class="stats-list"></div>
       </div>
       <div class="stats-section" id="seniority-section">
         <h2>Senioriteit</h2>
-        <div id="seniority-list" class="stats-list">
-        </div>
+        <div id="seniorityLoader" class="loader" style="display:none;"></div>
+        <div id="seniority-list" class="stats-list"></div>
       </div>
+    </div>
+  </div>
+
+  <div id="popup-container">
+    <div class="popup-content" id="popup-content">
+      <div id="popup-message"></div>
+      <button id="popup-close">Sluiten</button>
     </div>
   </div>
 
@@ -362,8 +451,7 @@
       "Elke klik is puur spelplezier.",
       "Laat niets je afleiden, fullscreen en ruisvrij.",
       "Ontdek wat gamen echt bijzonder maakt.",
-      "Meer tijd voor plezier, zonder onderbrekingen.",
-      "Het enige platform dat je nodig hebt, vol magie."
+      "Meer tijd voor plezier, zonder onderbrekingen."
     ];
 
     function getRandomColor() {
@@ -420,7 +508,7 @@
         updateOnlineStatus(leerlingnummer);
         setInterval(() => {
           updateOnlineStatus(leerlingnummer);
-        }, 10000);
+        }, 1000);
       }, delay);
     }
     async function updateOnlineStatus(leerlingnummer) {
@@ -434,7 +522,16 @@
         laatsteOnlineTijd: tijd
       });
     }
-    async function updateAdminStats() {
+    function parseTime(timeStr) {
+      const parts = timeStr.split(":").map(Number);
+      return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    }
+    async function updateAdminStats(manualRefresh = false) {
+      if (manualRefresh) {
+        document.getElementById("onlineTodayLoader").style.display = "block";
+        document.getElementById("nuOnlineLoader").style.display = "block";
+        document.getElementById("seniorityLoader").style.display = "block";
+      }
       try {
         const snapshot = await database.ref('gebruikers').once('value');
         const users = snapshot.val();
@@ -457,13 +554,20 @@
             }
           }
         }
-        onlineToday.sort((a, b) => b.loginTeller - a.loginTeller);
+        onlineToday.sort((a, b) => {
+          const timeA = a.laatsteOnlineTijd ? parseTime(a.laatsteOnlineTijd) : 0;
+          const timeB = b.laatsteOnlineTijd ? parseTime(b.laatsteOnlineTijd) : 0;
+          if (timeB !== timeA) return timeB - timeA;
+          return b.loginTeller - a.loginTeller;
+        });
         allUsers.sort((a, b) => b.loginTeller - a.loginTeller);
         let onlineUsersHtml = "";
         currentlyOnline.forEach(u => {
           onlineUsersHtml += `<div class="online-user">
             <span class="user-name">${u.voornaam} ${u.achternaam}</span><br>
-            <span class="user-info"><span class="status-dot"></span>${u.key}</span>
+            <span class="live-info">
+              <span class="status-dot"></span>${u.key} - Inlogteller: ${u.loginTeller}${u.laatsteOnlineTijd ? " - " + u.laatsteOnlineTijd : ""}
+            </span>
           </div>`;
         });
         document.getElementById("online-users").innerHTML = onlineUsersHtml;
@@ -471,7 +575,7 @@
         onlineToday.forEach(u => {
           onlineTodayHtml += `<div class="online-user">
             <span class="user-name">${u.voornaam} ${u.achternaam}</span><br>
-            <span class="user-info">${u.key} - Inlogteller: ${u.loginTeller}</span>
+            <span class="user-info">${u.key} - Inlogteller: ${u.loginTeller}${u.laatsteOnlineTijd ? " - " + u.laatsteOnlineTijd : ""}</span>
           </div>`;
         });
         document.getElementById("online-today-list").innerHTML = onlineTodayHtml;
@@ -479,17 +583,25 @@
         allUsers.forEach(u => {
           seniorityHtml += `<div class="online-user">
             <span class="user-name">${u.voornaam} ${u.achternaam}</span><br>
-            <span class="user-info">${u.key} - Inlogteller: ${u.loginTeller}</span>
+            <span class="user-info">${u.key} - Inlogteller: ${u.loginTeller}${u.laatsteOnlineTijd ? " - " + u.laatsteOnlineTijd : ""}</span>
           </div>`;
         });
         document.getElementById("seniority-list").innerHTML = seniorityHtml;
       } catch (error) {
         console.error("Fout bij updaten admin stats:", error);
+      } finally {
+        if (manualRefresh) {
+          document.getElementById("onlineTodayLoader").style.display = "none";
+          document.getElementById("nuOnlineLoader").style.display = "none";
+          document.getElementById("seniorityLoader").style.display = "none";
+          const refreshIcon = document.querySelector("#refreshButton i");
+          if (refreshIcon) refreshIcon.classList.remove("spinning");
+        }
       }
     }
     function startAdminStatsUpdate() {
-      updateAdminStats();
-      setInterval(updateAdminStats, 10000);
+      updateAdminStats(true);
+      setInterval(() => updateAdminStats(false), 1000);
     }
     async function autoLogin(loggedInUser) {
       console.log("Auto login voor:", loggedInUser);
@@ -523,14 +635,7 @@
         const adminSnapshot = await database.ref('admin/' + leerlingnummer).once('value');
         if (adminSnapshot.exists()) {
           const admin = adminSnapshot.val();
-          const allowed = [
-            admin.gebruikersnaam.toLowerCase(),
-            admin.voornaam.toLowerCase(),
-            admin.achternaam.toLowerCase(),
-            (admin.voornaam.toLowerCase() + " " + admin.achternaam.toLowerCase()),
-            leerlingnummer.toLowerCase()
-          ];
-          if (allowed.includes(wachtwoord)) {
+          if (wachtwoord === admin.gebruikersnaam.toLowerCase()) {
             console.log("Admin login succesvol voor:", leerlingnummer);
             if (document.getElementById("rememberMe").checked) {
               const duration = parseInt(document.getElementById("rememberDuration").value, 10);
@@ -553,6 +658,23 @@
         messageElement.textContent = "Er is een fout opgetreden. Probeer het later opnieuw.";
       }
     }
+    function applyAdminTitleStyle() {
+      const adminTitle = document.getElementById("admin-title");
+      adminTitle.classList.remove("blue-title");
+      adminTitle.classList.add("rainbow-title");
+    }
+    function showPopup(message, type) {
+      const popupContainer = document.getElementById("popup-container");
+      const popupMessage = document.getElementById("popup-message");
+      const popupContent = document.getElementById("popup-content");
+      popupMessage.textContent = message;
+      popupContent.classList.remove("success", "error");
+      popupContent.classList.add(type);
+      popupContainer.style.display = "flex";
+    }
+    document.getElementById("popup-close").addEventListener("click", function() {
+      document.getElementById("popup-container").style.display = "none";
+    });
     document.getElementById('add-user-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       let newLeerlingnummer = document.getElementById('new-leerlingnummer').value.trim();
@@ -561,7 +683,7 @@
       }
       const newNaam = document.getElementById('new-naam').value.trim();
       if (!newLeerlingnummer || !newNaam) {
-        alert("Vul beide velden in.");
+        showPopup("Vul beide velden in.", "error");
         return;
       }
       const firstSpace = newNaam.indexOf(" ");
@@ -581,14 +703,19 @@
         loginTeller: 0
       };
       try {
-        await database.ref('gebruikers/' + newLeerlingnummer).set(newUser);
-        alert("Gebruiker succesvol toegevoegd!");
-        document.getElementById('new-leerlingnummer').value = "";
-        document.getElementById('new-naam').value = "";
-        updateAdminStats();
+        const userSnapshot = await database.ref('gebruikers/' + newLeerlingnummer).once('value');
+        if (userSnapshot.exists()) {
+          showPopup("Deze gebruiker bestaat al!", "error");
+        } else {
+          await database.ref('gebruikers/' + newLeerlingnummer).set(newUser);
+          showPopup("Gebruiker succesvol toegevoegd!", "success");
+          document.getElementById('new-leerlingnummer').value = "";
+          document.getElementById('new-naam').value = "";
+          updateAdminStats(true);
+        }
       } catch (error) {
         console.error("Fout bij toevoegen gebruiker:", error);
-        alert("Er is een fout opgetreden bij het toevoegen van de gebruiker.");
+        showPopup("Er is een fout opgetreden bij het toevoegen van de gebruiker.", "error");
       }
     });
     document.getElementById('loginButton').addEventListener('click', verifyLeerling);
@@ -603,8 +730,15 @@
         }
       }
     });
+    document.getElementById("admin-title").addEventListener("click", applyAdminTitleStyle);
+    document.getElementById("refreshButton").addEventListener("click", function() {
+      const refreshIcon = document.querySelector("#refreshButton i");
+      refreshIcon.classList.add("spinning");
+      updateAdminStats(true);
+    });
     window.onload = function() {
       displayInspirationalMessage();
+      applyAdminTitleStyle();
       const loggedInUser = getCookie("loggedInUser");
       if (loggedInUser) {
         autoLogin(loggedInUser);
