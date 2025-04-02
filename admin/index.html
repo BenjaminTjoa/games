@@ -548,7 +548,7 @@
             if (user.laatsteOnlineTijd) {
               const parts = user.laatsteOnlineTijd.split(":");
               const userTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
-              if ((now - userTime) <= 30000) {
+              if ((now - userTime) <= 60000) {
                 currentlyOnline.push({ key, ...user });
               }
             }
