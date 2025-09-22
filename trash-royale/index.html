@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Trash Royale</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JFE36ZFF4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-JFE36ZFF4J");
+    </script>
+    <link
+      rel="icon"
+      href="https://www.BenjaminTjoa.com/BT.png"
+      type="image/x-icon"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: #000000;
+        overflow: hidden;
+      }
+
+      #stage {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      #frameWrapper {
+        --game-w: 1000;
+        --game-h: 600;
+        width: calc(var(--game-w) * 1px);
+        height: calc(var(--game-h) * 1px);
+        transform-origin: center center;
+        will-change: transform;
+        box-sizing: border-box;
+      }
+
+      #gameframe {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        background: #000;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="frameWrapper">
+        <iframe
+          id="gameframe"
+          src="https://link.benjamintjoa.com/trash-royale"
+          scrolling="no"
+          title="Trash Royale"
+        ></iframe>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const wrapper = document.getElementById("frameWrapper");
+
+        let intrinsic = {
+          w:
+            parseInt(getComputedStyle(wrapper).getPropertyValue("--game-w")) ||
+            1000,
+          h:
+            parseInt(getComputedStyle(wrapper).getPropertyValue("--game-h")) ||
+            600,
+        };
+
+        function fit() {
+          const cw = window.innerWidth;
+          const ch = window.innerHeight;
+
+          const scale = Math.min(cw / intrinsic.w, ch / intrinsic.h);
+          wrapper.style.transform = `scale(${scale})`;
+        }
+
+        window.addEventListener("resize", fit);
+        window.addEventListener("orientationchange", fit);
+
+        requestAnimationFrame(fit);
+
+        window.addEventListener("message", (e) => {
+          try {
+            const data = e.data || {};
+            if (
+              typeof data.width === "number" &&
+              typeof data.height === "number"
+            ) {
+              intrinsic.w = data.width;
+              intrinsic.h = data.height;
+              wrapper.style.width = intrinsic.w + "px";
+              wrapper.style.height = intrinsic.h + "px";
+              fit();
+            }
+            if (data && data.fit) {
+              fit();
+            }
+          } catch (err) {}
+        });
+
+        window.setGameSize = function (w, h) {
+          intrinsic.w = Number(w) || intrinsic.w;
+          intrinsic.h = Number(h) || intrinsic.h;
+          wrapper.style.width = intrinsic.w + "px";
+          wrapper.style.height = intrinsic.h + "px";
+          fit();
+        };
+      })();
+    </script>
+  </body>
+</html>
